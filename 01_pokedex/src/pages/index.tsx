@@ -3,6 +3,31 @@ import axios from 'axios'
 import Head from 'next/head'
 import PokemonCard from '@/components/PokemonCard'
 import { GetPokemonData, Pokemon } from '@/types'
+import styled from 'styled-components'
+
+const Main = styled.main`
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  max-width: 1100px;
+  margin: auto;
+`
+
+const Title = styled.h1`
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+`
+
+const CardGrid = styled.section`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+`
 
 const Home: NextPage<{ pokemonsData: Pokemon[] }> = ({ pokemonsData }) => {
   return (
@@ -13,9 +38,9 @@ const Home: NextPage<{ pokemonsData: Pokemon[] }> = ({ pokemonsData }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="App">
-        <h1>My pokemons</h1>
-        <div>
+      <Main>
+        <Title>My pokemons</Title>
+        <CardGrid>
           {pokemonsData.map(({ id, name, sprites, types }) => {
             return (
               <PokemonCard
@@ -27,8 +52,8 @@ const Home: NextPage<{ pokemonsData: Pokemon[] }> = ({ pokemonsData }) => {
               />
             )
           })}
-        </div>
-      </main>
+        </CardGrid>
+      </Main>
     </>
   )
 }
