@@ -42,7 +42,6 @@ const PokemonName = styled.h2`
 `
 
 const PokemonImage = styled(Image)`
-  width: 150px;
   display: block;
   margin: auto;
 `
@@ -60,8 +59,8 @@ export default function PokemonCard({ id, name, sprites, types }: Pokemon) {
         className="Card--image"
         src={sprites.front_default}
         alt={name}
-        width={96}
-        height={96}
+        width={150}
+        height={150}
       />
       <PokemonName>{name}</PokemonName>
       <PokemonType>{types.map(poke => poke.type.name).join(', ')}</PokemonType>
