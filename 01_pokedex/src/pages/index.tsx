@@ -1,8 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next'
-import axios from 'axios'
 import Head from 'next/head'
 import PokemonCard from '@/components/PokemonCard'
-import { GetPokemonData, Pokemon } from '@/types'
+import { Pokemon } from '@/types'
+import { generatePokemonPromises } from '@/helpers/pokemon'
 import styled from 'styled-components'
 
 const Main = styled.main`
@@ -56,28 +56,6 @@ const Home: NextPage<{ pokemonsData: Pokemon[] }> = ({ pokemonsData }) => {
       </Main>
     </>
   )
-}
-
-const getPokemonURL = (id: number): string =>
-  `https://pokeapi.co/api/v2/pokemon/${id}`
-
-const generatePokemonPromises = () => {
-  return Array<number>(150)
-    .fill(150)
-    .map((_, index) =>
-      axios
-        .get<GetPokemonData>(getPokemonURL(index + 1))
-        .then(({ data }) => data)
-        .catch(error => {
-          if (axios.isAxiosError(error)) {
-            console.log('error message: ', error.message)
-            return error.message
-          } else {
-            console.log('unexpected error: ', error)
-            return 'An unexpected error occurred'
-          }
-        }),
-    )
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
